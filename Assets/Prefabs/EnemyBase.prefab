@@ -173,10 +173,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c19e384c2931ba44adad06487329bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnRate: 0.5
   unit: {fileID: 1533889020321665317, guid: 6e23dba9186f3724cae87053b153a517, type: 3}
   spawnPosition: {fileID: 3190637951211564140}
-  fireRate: 1
-  numberTospawn: 5
+  numberTospawn: 10
+  spawnInterval: 2
+  spawnDuration: 1
 --- !u!1 &9121303593914830617
 GameObject:
   m_ObjectHideFlags: 0

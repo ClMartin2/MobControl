@@ -11,7 +11,7 @@ public class BasicUnit : MonoBehaviour
 
 	private Rigidbody rb;
 
-	private void Start()
+	virtual protected void Start()
 	{
 		rb = GetComponent<Rigidbody>();
 	}
