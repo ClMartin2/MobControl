@@ -173,7 +173,7 @@ Shader "Toony Colors Pro 2/Examples/PBS/Blended Outline"
 
 	#ifdef TCP2_OUTLINE_CONST_SIZE
 			//Camera-independent outline size
-			float dist = distance(mul(unity_WorldToObject, float4(_WorldSpaceCameraPos, 0)).xyz, v.vertex.xyz);
+			float dist = distance(_WorldSpaceCameraPos, mul(unity_ObjectToWorld, v.vertex));
 			#define SIZE	dist
 	#else
 			#define SIZE	1.0

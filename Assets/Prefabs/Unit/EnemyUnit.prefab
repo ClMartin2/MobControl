@@ -132,6 +132,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6301368603354800426, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6301368603354800426, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 117bedcdec4ddf345a6ed10a822c520d, type: 2}
+    - target: {fileID: 6301368603354800426, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 117bedcdec4ddf345a6ed10a822c520d, type: 2}
     - target: {fileID: 6402958516586950523, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -172,6 +184,16 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1533889020321665317}
   m_SourcePrefab: {fileID: 100100000, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
+--- !u!4 &454270361817428 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8091732491667249044, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
+  m_PrefabInstance: {fileID: 8091287361014220480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &887051693561914785 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8936678969168028513, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
+  m_PrefabInstance: {fileID: 8091287361014220480}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8410810497885686889 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 356687523252406953, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
@@ -189,7 +211,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bbe8a5b97b1adb45b547cf6e303946a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 300
   layerMaskEnemy:
     serializedVersion: 2
     m_Bits: 128
+  _collider: {fileID: 8466532542623066892}
+  vfxSpawn: {fileID: 6286108179036765299, guid: f04c432545908ec489268aa8f934375b, type: 3}
+  positionVfxSpawn: {fileID: 454270361817428}
+  delaySmokeFX: 0.1
+  deathYPositionOffset: -2
+  minRotationOffset: {x: -50, y: 50}
+  maxRotationOffset: {x: -100, y: 100}
+  durationAnimDeath: 1
+  curveAnimDeath: 1
+  animator: {fileID: 887051693561914785}
+  deathMaterial: {fileID: 2100000, guid: fe6c44ece4fb9314eac48f21df68e257, type: 2}
+  nameParameterDeath: death
+--- !u!136 &8466532542623066892 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 375255077231357388, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
+  m_PrefabInstance: {fileID: 8091287361014220480}
+  m_PrefabAsset: {fileID: 0}

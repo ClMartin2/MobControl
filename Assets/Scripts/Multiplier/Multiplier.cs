@@ -1,55 +1,48 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Multiplier : MonoBehaviour
+public class Multiplier : SpawnerUnit
 {
-	[SerializeField] private int multiplier = 1;
-	[SerializeField] private GameObject objectToSpawn;
 	[SerializeField] private TextMeshPro textMultiplier; 
-	[SerializeField] private float forceStrength = 3f;
-	[SerializeField] private float angleSpread = 30f;
+	[SerializeField] private UnityEvent onMultiply; 
 
 	private HashSet<GameObject> alreadyTriggered = new HashSet<GameObject>();
 
 	virtual protected void Start()
 	{
-		textMultiplier.text = "x" + multiplier.ToString();
+		textMultiplier.text = "X" + numberTospawn.ToString();
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
 		if (alreadyTriggered.Contains(other.gameObject)) return;
 
-		alreadyTriggered.Add(other.gameObject);
+		spawnPosition = other.transform;
 
-		for (int i = 1; i < multiplier; i++)
-		{
-			Transform otherTransform = other.gameObject.transform;
+		List<BasicUnit> allSpawnUnits = SpawnUnit();
+		allSpawnUnits.Add(other.GetComponent<BasicUnit>());
 
-			GameObject multipliedUnit = Instantiate(objectToSpawn, otherTransform.position, otherTransform.rotation);
-			alreadyTriggered.Add(multipliedUnit);
-
-			PushUnit(multipliedUnit);
+		foreach (BasicUnit unit in allSpawnUnits) {
+			alreadyTriggered.Add(unit.gameObject);
 		}
+
+		foreach (var unit in allSpawnUnits)
+		{
+			unit.onDeath += Unit_onDeath;
+		}
+
+		onMultiply?.Invoke();
 	}
 
-	private void PushUnit(GameObject unit)
+	private void Unit_onDeath(BasicUnit sender)
 	{
-		Rigidbody rb = unit.GetComponent<Rigidbody>();
-
-		if (rb != null)
-		{
-			Vector3 forceDirection = GetRandomDirection();
-			rb.AddForce(forceDirection * forceStrength, ForceMode.Impulse);
-		}
+		RemoveObjectAlreadyTriggered(sender.gameObject);
 	}
 
-	private Vector3 GetRandomDirection()
+	public void RemoveObjectAlreadyTriggered(GameObject objectToRemove)
 	{
-		float angle = Random.Range(-angleSpread, angleSpread);
-		Quaternion rotation = Quaternion.Euler(0, angle, 0);
-		return rotation * transform.forward;
+		alreadyTriggered.Remove(objectToRemove);
 	}
 }
