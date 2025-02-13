@@ -6,17 +6,20 @@ using UnityEngine.Events;
 
 public class Cannon : SpawnerUnit
 {
-    [SerializeField] private float speed = 500;
+	[SerializeField] private Animator animator;
+	[SerializeField] private string nameParameterShootAnimation;
+	[SerializeField] private Transform[] wheels;
+
+	[Header("Speed Settings")]
+	[Space(10)]
+
+	[SerializeField] private float speed = 500;
     [SerializeField] private float wheelRotationSpeed = 500;
     [SerializeField] private float maxLength = 100;
 	[SerializeField] private float minX = -20f;
 	[SerializeField] private float maxX = 20f;
-	[SerializeField] private Animator animator;
-	[SerializeField] private string nameParameterShootAnimation;
-	[SerializeField] private Transform[] wheels;
-	[SerializeField] private UnityEvent onShoot;
 
-	[Header("Muzzle FLash")]
+	[Header("Muzzle Flash Settings")]
 	[Space(10)]
 	[SerializeField] private GameObject muzzleFlash;
 	[SerializeField] private float startAlphaMuzzleFlash = 0;
@@ -24,7 +27,10 @@ public class Cannon : SpawnerUnit
 	[SerializeField] private float durationApparition = 0.1f;
 	[SerializeField] private float durationDisparition = 0.05f;
 	[SerializeField] private float stayAtScreen = 0.3f;
-	[SerializeField] private ParticleSystem fireParticle;
+
+	[Space(10)]
+	[SerializeField] private UnityEvent onShoot;
+	[SerializeField] private UnityEvent onStopShoot;
 
 	private SpriteRenderer muzzleRenderer;
 	private Vector3 lastMousePosition;
@@ -47,10 +53,9 @@ public class Cannon : SpawnerUnit
 		{
 			lastMousePosition = GetMouseWorldMousePosition();
 			counterFireRate = 0;
-			fireParticle.Play();
 		}else if (Input.GetMouseButtonUp(0))
 		{
-			fireParticle.Stop();
+			onStopShoot?.Invoke();
 		}
 
 		if (Input.GetMouseButton(0))

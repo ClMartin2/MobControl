@@ -194,6 +194,17 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 8936678969168028513, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
   m_PrefabInstance: {fileID: 8091287361014220480}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1410937420706854527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7196381564183638207, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
+  m_PrefabInstance: {fileID: 8091287361014220480}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8410810497885686889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd225e110a3f77468d591a092de48f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8410810497885686889 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 356687523252406953, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
@@ -216,6 +227,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _collider: {fileID: 8466532542623066892}
+  _callBackOnDeathToEnemy:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1410937420706854527}
+        m_TargetAssemblyTypeName: DoSound, Assembly-CSharp
+        m_MethodName: StartAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   vfxSpawn: {fileID: 6286108179036765299, guid: f04c432545908ec489268aa8f934375b, type: 3}
   positionVfxSpawn: {fileID: 454270361817428}
   delaySmokeFX: 0.1

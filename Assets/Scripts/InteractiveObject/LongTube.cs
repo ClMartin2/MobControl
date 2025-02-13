@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class LongTube : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class LongTube : MonoBehaviour
     [SerializeField] private Vector3 animEnterAddScale;
     [SerializeField] private Ease easeAnimEnter = Ease.Linear;
     [SerializeField] private Ease easeAnimReset = Ease.Linear;
+    [SerializeField] private UnityEvent enterTube;
+    [SerializeField] private UnityEvent exitTube;
     
 	private Vector3 startScaleEnter;
 	private Vector3 startScaleExit;
@@ -26,19 +29,7 @@ public class LongTube : MonoBehaviour
 		GameObject objectToSpawn = collision.gameObject;
 		objectToSpawn.SetActive(false);
 		StartCoroutine(SpawnAtEnd(objectToSpawn));
-
-		Vector3 _endScale = startScaleExit + animEnterAddScale;
-		transform.DOScale(_endScale,durationAnimEnter).OnComplete(ResetScaleEnter).SetEase(easeAnimEnter);
-	}
-
-	private void ResetScaleEnter()
-	{
-		transform.DOScale(startScaleEnter, durationAnimEnter).SetEase(easeAnimReset);
-	}
-	
-	private void ResetScaleExit()
-	{
-		exit.DOScale(startScaleExit, durationAnimEnter).SetEase(easeAnimReset); ;
+		enterTube?.Invoke();
 	}
 
 	private IEnumerator SpawnAtEnd(GameObject objectToSpawn)
@@ -54,10 +45,7 @@ public class LongTube : MonoBehaviour
 		objectToSpawn.transform.rotation = end.rotation;
 
 		objectToSpawn.SetActive(true);
-
-		Vector3 _endScale = startScaleExit + animEnterAddScale;
-		exit.transform.DOScale(_endScale, durationAnimEnter).OnComplete(ResetScaleExit).SetEase(easeAnimEnter);
-
+		exitTube?.Invoke();
 
 		yield return null;
 	}

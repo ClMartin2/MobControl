@@ -188,7 +188,7 @@ PrefabInstance:
       addedObject: {fileID: 2901521593114224678}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 356687523252406953, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
-      insertIndex: -1
+      insertIndex: 3
       addedObject: {fileID: 229328246609177578}
   m_SourcePrefab: {fileID: 100100000, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
 --- !u!136 &467670531343158845 stripped
@@ -217,16 +217,32 @@ MonoBehaviour:
   layerMaskEnemy:
     serializedVersion: 2
     m_Bits: 256
-  deathMaterial: {fileID: 2100000, guid: fe6c44ece4fb9314eac48f21df68e257, type: 2}
   _collider: {fileID: 467670531343158845}
+  _callBackOnDeathToEnemy:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6960029242733892430}
+        m_TargetAssemblyTypeName: DoSound, Assembly-CSharp
+        m_MethodName: StartAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   vfxSpawn: {fileID: 6286108179036765299, guid: 4002e0647079dc249a25c9e68345836a, type: 3}
   positionVfxSpawn: {fileID: 7094475545306881327}
+  delaySmokeFX: 0
   deathYPositionOffset: -2
   minRotationOffset: {x: -50, y: 50}
   maxRotationOffset: {x: 100, y: 100}
   durationAnimDeath: 1
   curveAnimDeath: 1
   animator: {fileID: 9173029193936470160}
+  deathMaterial: {fileID: 2100000, guid: fe6c44ece4fb9314eac48f21df68e257, type: 2}
   nameParameterDeath: death
   particleSystemSpawn: {fileID: 5348608949951223932}
 --- !u!4 &956385235239037306 stripped
@@ -234,6 +250,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1012623898630425227, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
   m_PrefabInstance: {fileID: 236530652188107761}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6960029242733892430 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7196381564183638207, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}
+  m_PrefabInstance: {fileID: 236530652188107761}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557151362659379544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd225e110a3f77468d591a092de48f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7094475545306881327 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7006739777904951006, guid: 8e068e13ddd01084a9b9e0de3b1f0a9b, type: 3}

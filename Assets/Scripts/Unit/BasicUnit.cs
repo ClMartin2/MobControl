@@ -3,6 +3,7 @@ using DG.Tweening;
 using DG.Tweening.Core.Easing;
 using UnityEngine.VFX;
 using System.Collections;
+using UnityEngine.Events;
 
 public delegate void OnDeath(BasicUnit sender);
 
@@ -13,6 +14,7 @@ public class BasicUnit : MonoBehaviour
 	[SerializeField] private LayerMask layerMaskEnemy;
 	[SerializeField] public Rigidbody rb { get; private set; }
 	[SerializeField] private Collider _collider;
+	[SerializeField] public UnityEvent _callBackOnDeathToEnemy;
 
 	[Header("Spawn FX Settings")]
 	[Space(10)]
@@ -87,10 +89,12 @@ public class BasicUnit : MonoBehaviour
 			{
 				unit.Death();
 			}
+
+			_callBackOnDeathToEnemy?.Invoke();
 		}
 	}
 
-	public void Death()
+	virtual public void Death()
 	{
 		SkinnedMeshRenderer skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 		Material[] materials = skinnedMeshRenderer.materials;

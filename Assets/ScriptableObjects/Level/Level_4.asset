@@ -16,4 +16,4 @@ MonoBehaviour:
   spawnInterval: 1
   spwanDuration: 1
   spawnRate: 0.35
-  numberToSpawn: 7
+  numberToSpawn: 10
