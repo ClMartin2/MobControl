@@ -16,20 +16,19 @@ public class BlockingObstacle : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		life--;
-		lifeTxt.text = life.ToString();
-		onCollision?.Invoke();
-
 		GameObject objectCollision = collision.gameObject;
 
-		if (objectCollision.TryGetComponent<BasicUnit>(out BasicUnit unit))
+		if (objectCollision.TryGetComponent<AllyUnit>(out AllyUnit unit))
 		{
+			life--;
+			lifeTxt.text = life.ToString();
+			onCollision?.Invoke();
 			unit.Death();
-		}
 
-		if (life <= 0)
-		{
-			Death();
+			if (life <= 0)
+			{
+				Death();
+			}
 		}
 	}
 

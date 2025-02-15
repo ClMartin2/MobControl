@@ -8,19 +8,23 @@ using UnityEngine;
 public class DoColor : MonoBehaviour
 {
 	[SerializeField] private MeshRenderer meshRenderer;
+	[SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
 	[SerializeField] private Color newColor;
 	[SerializeField] private string nameColor = "_EmissionColor";
 	[SerializeField] private float durationLerpNewColor;
 	[SerializeField] private float durationLerpStartColor;
+	[SerializeField] private float intensityHDRColor;
 	[SerializeField] private Ease curveLerpNewColor = Ease.Linear;
 	[SerializeField] private Ease curveLerpStartColor = Ease.Linear;
 	[SerializeField] private bool resetAfterLerp;
 
 	private Color startColor;
+	private Renderer _renderer;
 
 	private void Start()
 	{
-		startColor = meshRenderer.material.GetColor(nameColor);
+		_renderer = meshRenderer ? meshRenderer : skinnedMeshRenderer;
+		startColor = _renderer.material.GetColor(nameColor);
 	}
 
 	public void StartToShine()
@@ -36,6 +40,6 @@ public class DoColor : MonoBehaviour
 
 	private void SetEmissionColor(Color color, float duration, Ease curve, Action callBack = null)
 	{
-		meshRenderer.material.DOColor(color, nameColor, duration).SetEase(curve).OnComplete(() => callBack());
+		_renderer.material.DOColor(color, nameColor, duration).SetEase(curve).OnComplete(() => callBack());
 	}
 }

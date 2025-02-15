@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7714452f71f4e85428a96b93739d139e, type: 3}
   m_Name: Level_3
   m_EditorClassIdentifier: 
-  timeToChangeLevel: 3
-  spawnInterval: 2
+  timeToChangeLevel: 1.5
+  spawnInterval: 1.4
   spwanDuration: 1.5
   spawnRate: 0.25
-  numberToSpawn: 8
+  numberToSpawn: 10

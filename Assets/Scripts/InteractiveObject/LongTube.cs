@@ -8,21 +8,8 @@ public class LongTube : MonoBehaviour
     [SerializeField] private float timeToTravelTube = 1f;
     [SerializeField] private Transform end;
     [SerializeField] private Transform exit;
-    [SerializeField] private float durationAnimEnter;
-    [SerializeField] private Vector3 animEnterAddScale;
-    [SerializeField] private Ease easeAnimEnter = Ease.Linear;
-    [SerializeField] private Ease easeAnimReset = Ease.Linear;
     [SerializeField] private UnityEvent enterTube;
     [SerializeField] private UnityEvent exitTube;
-    
-	private Vector3 startScaleEnter;
-	private Vector3 startScaleExit;
-
-	private void Start()
-	{
-		startScaleEnter = transform.lossyScale;
-		startScaleExit = exit.lossyScale;
-	}
 
 	private void OnCollisionEnter(Collision collision)
 	{

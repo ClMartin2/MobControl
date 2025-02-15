@@ -1,11 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+
+public delegate void EventHandlerAllyBase(AllyBase sender);
 
 public class AllyBase : MonoBehaviour
 {
+	public event EventHandlerAllyBase onLose;
+
 	private void OnTriggerEnter(Collider other)
 	{
-		Debug.Log("Loose");
+		if (other.TryGetComponent<EnemyUnit>(out EnemyUnit unit))
+			unit.Death();
+
+		onLose?.Invoke(this);
 	}
 }

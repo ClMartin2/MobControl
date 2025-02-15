@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 
+public delegate void EventHandlerEnemyBase (EnemyBase sender);
+
 public class EnemyBase : SpawnerUnit
 {
 	[SerializeField] private float spawnInterval = 2f;
@@ -9,18 +11,28 @@ public class EnemyBase : SpawnerUnit
 	[SerializeField] private Dificulty dificulty;
 	[SerializeField] private ParticleSystem fxTouch;
 
+	public event EventHandlerEnemyBase onWin;
+
 	private float counterSpawnInterval;
 	private int currentIndexDificulty;
 
 	private void Start()
 	{
 		SetDificulty();
-		StartCoroutine(ChangeLevel());
 		counterSpawnInterval = spawnInterval;
+	}
+
+	public override void Init()
+	{
+		base.Init();
+		StartCoroutine(ChangeLevel());
 	}
 
 	private void Update()
 	{
+		if (!init)
+			return;
+
 		counterSpawnInterval += Time.deltaTime;
 
 		if(counterSpawnInterval >= spawnInterval)
@@ -70,7 +82,7 @@ public class EnemyBase : SpawnerUnit
 
 	public void Death()
 	{
-		Debug.Log("Win");
+		onWin?.Invoke(this);
 		Destroy(gameObject);
 	}
 

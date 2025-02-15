@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
+using System;
 
 public class DoScale : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class DoScale : MonoBehaviour
 	[SerializeField] private Ease curveAnimScale = Ease.OutBounce;
 	[SerializeField] private Ease curveResetScale = Ease.OutBounce;
 	[SerializeField] private Transform transformToScale;
+	[SerializeField] private bool keepScaleTransform = false;
 	[SerializeField] private UnityEvent onEndAnim;
+	[SerializeField] private UnityEvent onEndAnimStart;
 
 	private Vector3 startScale;
 
@@ -17,10 +20,17 @@ public class DoScale : MonoBehaviour
 	{
 		startScale = transformToScale.localScale;
 	}
+	
+	public void Init()
+	{
+		startScale = transformToScale.localScale;
+	}
 
 	public void StartAnim()
 	{
-		transformToScale.DOScale(startScale + addValueScale, durationAnim).SetEase(curveAnimScale).OnComplete(ResetToStartScale);
+		Action callBack = keepScaleTransform ? callBack = null : callBack = ResetToStartScale;
+
+		transformToScale.DOScale(startScale + addValueScale, durationAnim).SetEase(curveAnimScale).OnComplete(() => { EndStartAnim(); callBack(); });
 	}
 
 	private void ResetToStartScale()
@@ -28,8 +38,13 @@ public class DoScale : MonoBehaviour
 		transformToScale.DOScale(startScale, durationAnim).SetEase(curveResetScale).OnComplete(EndAnim);
 	}
 
-	public void EndAnim()
+	private void EndAnim()
 	{
 		onEndAnim?.Invoke();
+	}
+	
+	private void EndStartAnim()
+	{
+		onEndAnimStart?.Invoke();
 	}
 }

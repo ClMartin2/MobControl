@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpawnerUnit : MonoBehaviour
 {
-	[SerializeField] protected float spawnRate = 0.5f;
+	[SerializeField] public float spawnRate = 0.5f;
 	[SerializeField] private BasicUnit unit;
 	[SerializeField] protected Transform spawnPosition;
 	[SerializeField] protected int numberTospawn = 1;
@@ -11,6 +11,12 @@ public class SpawnerUnit : MonoBehaviour
 	[SerializeField] private float angleSpread = 30f;
 
 	protected float counterFireRate = 0;
+	protected bool init = false;
+
+	virtual public void Init()
+	{
+		init = true;
+	}
 
 	virtual protected List<BasicUnit> SpawnUnit()
 	{
